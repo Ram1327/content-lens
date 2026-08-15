@@ -1,0 +1,39 @@
+// This is your Prisma schema file — the source of truth for the DB shape.
+// Run `pnpm db:migrate` to apply changes.
+// Run `pnpm db:generate` after schema changes to regenerate the client.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  // Supabase pooler URL — used by Vercel serverless functions
+  url       = env("DATABASE_URL")
+  // Supabase direct URL — required for prisma migrate (pooler doesn't support it)
+  directUrl = env("DIRECT_URL")
+}
+
+// ── Phase 1 — IP-based rate limiting (anonymous MVP) ──────────────────────
+model RateLimit {
+  id        String   @id @default(cuid())
+  ip        String   @unique
+  count     Int      @default(0)
+  /// Rolling window reset timestamp
+  resetAt   DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ── Phase 3 — Scan history (optional, uncomment only when Phase 3 starts) ──
+// model ScanResult {
+//   id           String   @id @default(cuid())
+//   userId       String?
+//   contentType  String   // "text" | "image" | "video"
+//   verdict      String   // "ai_generated" | "human" | "uncertain"
+//   confidence   Float
+//   modelVersion String
+//   /// SHA-256 of the raw input — used to avoid re-running identical inputs
+//   inputHash    String
+//   createdAt    DateTime @default(now())
+// }

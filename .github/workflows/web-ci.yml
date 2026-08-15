@@ -1,0 +1,37 @@
+name: Web CI
+
+on:
+  push:
+    paths:
+      - "apps/web/**"
+      - "packages/shared-types/**"
+  pull_request:
+    paths:
+      - "apps/web/**"
+      - "packages/shared-types/**"
+
+jobs:
+  lint-typecheck:
+    name: Lint & Type-check
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Type-check
+        run: pnpm --filter @content-lens/web exec tsc --noEmit
+
+      - name: Lint
+        run: pnpm --filter @content-lens/web lint
