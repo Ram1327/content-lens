@@ -5,21 +5,21 @@
 > in unless real planning has happened for it.
 
 ## Phase 0 — Setup & Contract
-- [ ] Create GitHub repo, set up monorepo structure (`apps/web`, `apps/ml-service`, `packages/shared-types`)
-- [ ] Scaffold Next.js (App Router + TypeScript) app in `apps/web`
-- [ ] Set up TailwindCSS + shadcn/ui
-- [ ] Deploy a blank Next.js app to Vercel to confirm the pipeline works
-- [ ] Agree on the `/detect/text` API contract with the ML side, write it into `PROJECT.md`
-- [ ] Create Supabase project, connect Prisma, run first migration
+- [x] Create GitHub repo, set up monorepo structure (`apps/web`, `apps/ml-service`, `packages/shared-types`)
+- [x] Scaffold Next.js (App Router + TypeScript) app in `apps/web`
+- [x] Set up TailwindCSS + shadcn/ui
+- [x] Deploy a blank Next.js app to Vercel to confirm the pipeline works
+- [x] Agree on the `/detect/text` API contract with the ML side, write it into `PROJECT.md`
+- [x] Create Supabase project, connect Prisma, run first migration
 
 ## Phase 1 — Text Detection MVP
-- [ ] Build landing page explaining what the tool does
-- [ ] Build text input form + "Check" button
-- [ ] Build API route that forwards text to the ml-service `/detect/text` endpoint
-- [ ] Build result screen (verdict, confidence score, short explanation)
-- [ ] Add basic IP-based rate limiting (e.g. 10 checks/day)
-- [ ] Point at the real ml-service endpoint once it's live (start against a mock/dummy response)
-- [ ] Deploy and test the full pipeline end-to-end
+- [x] Build landing page explaining what the tool does
+- [x] Build text input form + "Check" button
+- [x] Build API route that forwards text to the ml-service `/detect/text` endpoint
+- [x] Build result screen (verdict, confidence score, short explanation)
+- [x] Add basic IP-based rate limiting (e.g. 10 checks/day)
+- [x] Point at the real ml-service endpoint once it's live (start against a mock/dummy response)
+- [x] Deploy and test the full pipeline end-to-end
 
 ## Phase 2 — Image Detection
 - [ ] Build image upload UI

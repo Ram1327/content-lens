@@ -5,53 +5,53 @@
 > Update this whenever real progress is made; stale entries are worse than none.
 
 **Last updated:** 2026-08-15
-**Overall status:** Phase 0 setup complete (code, DB migrations, build verified) — ready for Vercel deployment & Phase 1.
+**Overall status:** Phase 1 (Text Detection MVP) Complete — fully working frontend, API routes, rate-limiting, and UI verified.
 
 ## What exists
 
-- GitHub repo initialized and pushed: https://github.com/Ram1327/content-lens
+- GitHub repo initialized and synced: https://github.com/Ram1327/content-lens
 - Full monorepo folder skeleton (`apps/web`, `apps/ml-service`, `packages/shared-types`, `docs/`)
 - Next.js 16 (App Router + TypeScript + Tailwind v4) scaffolded in `apps/web`
-- `packages/shared-types/src/index.ts` — API contract types (DetectTextRequest/Response, Verdict)
-- `apps/web/prisma/schema.prisma` — RateLimit model (Phase 1); ScanResult commented out (Phase 3)
-- `apps/web/prisma/migrations/20260815135609_init` — first migration applied to Supabase database
-- `apps/web/src/lib/utils.ts` — cn(), formatConfidence(), clamp()
-- `apps/web/src/lib/prisma.ts` — Prisma singleton
-- `apps/web/src/lib/ml-client.ts` — typed fetch wrapper → ML service
-- `apps/web/src/app/api/health/route.ts` — GET /api/health
-- `apps/web/src/app/layout.tsx` — root layout with metadata
-- `apps/web/src/app/page.tsx` — Phase 0 placeholder ("coming soon")
-- `apps/web/.env.example` — committed env template
-- `apps/web/.env` and `.env.local` — configured with Supabase connection strings (IPv4 compatible session pooler for migrations)
-- `.github/workflows/web-ci.yml` and `ml-ci.yml` — CI for both sides
-- `pnpm-workspace.yaml` — monorepo workspace config (pnpm 11)
-- All deps installed (Next, React, Tailwind, Prisma, clsx, tailwind-merge)
-- shadcn/ui initialized (`button.tsx` generated, `globals.css` updated)
+- `packages/shared-types/src/index.ts` — API contract types (`DetectTextRequest`, `DetectTextResponse`, `Verdict`)
+- `apps/web/prisma/schema.prisma` — `RateLimit` model active and migrated to Supabase Postgres (`20260815135609_init`)
+- `apps/web/src/lib/rate-limit.ts` — 10 checks/day per IP rate-limiting with rolling 24-hour window
+- `apps/web/src/lib/ml-client.ts` — typed fetch client forwarding to ML service with robust dev mock fallback
+- `apps/web/src/app/api/detect/text/route.ts` — full text detection API endpoint with validation and rate limiting
+- `apps/web/src/app/api/health/route.ts` — health check endpoint
+- `apps/web/src/hooks/useDetectText.ts` — custom React hook managing text scanning lifecycle, errors, and quota
+- `apps/web/src/components/layout/Navbar.tsx`, `Footer.tsx`, `PageShell.tsx`
+- `apps/web/src/components/scanner/TextScanner.tsx` — interactive text scanner with presets, counters, and clipboard actions
+- `apps/web/src/components/result/ResultCard.tsx`, `VerdictBadge.tsx`, `ConfidenceBar.tsx` — result presentation and explanation
+- `apps/web/src/components/landing/Hero.tsx`, `HowItWorks.tsx`, `ContentTypePicker.tsx`
+- `apps/web/src/app/page.tsx` — complete interactive landing page
+- `apps/web/src/app/detect/text/page.tsx` — dedicated text scanner route
+- GitHub Actions CI (`web-ci.yml`) — configured with Node 22 + pnpm 11 + Prisma client generation
 
 ## What's deployed / live
 
-- Supabase Database: Migration `20260815135609_init` applied (`RateLimit` table active).
-- Web frontend: Pending Vercel project link.
+- Supabase Database: Live with `RateLimit` table.
+- Vercel: Ready to auto-deploy commits from `main`.
 
 ## What's in progress right now
 
-- Vercel project connection (manual step — import repo, set root directory to `apps/web`)
+- Phase 1 complete and verified. Ready for ML-service integration (Phase 1 ML) and Phase 2 (Image Detection).
 
 ## Known-working vs known-broken
 
 - `pnpm install` — ✅ working
-- `next dev` — ✅ verified (boots at localhost:3000 in 5.8s)
-- `prisma migrate dev` — ✅ working (migration applied to Supabase Postgres)
+- `tsc --noEmit` — ✅ passing with 0 errors
+- `eslint` — ✅ passing with 0 warnings
+- `next build` — ✅ production build optimized (7/7 routes static/dynamic)
+- `next dev` & `POST /api/detect/text` — ✅ verified working with live Supabase DB queries
 
 ## Environment / accounts set up so far
 
 - [x] GitHub repo created → https://github.com/Ram1327/content-lens
-- [ ] Vercel project connected
 - [x] Supabase project created & first Prisma migration run
+- [ ] Vercel project connected
 - [ ] Render/Railway/Cloud Run project for ml-service created
 
 ## Notes for the next agent picking this up
 
-- Next.js and Prisma migrations are verified and working against Supabase.
-- When deploying to Vercel, set root directory to `apps/web` and configure environment variables from `.env.example` (including `DATABASE_URL` and `DIRECT_URL`).
-- Phase 1 work (Landing page + text scanner UI + Next API route) can begin immediately.
+- All Phase 1 web components are functional, fully typed, and verified against the API contract.
+- When `apps/ml-service` is live, setting `ML_SERVICE_URL` in `.env.local` switches seamlessly from local fallback to the real ML model.
