@@ -1,0 +1,51 @@
+# ── Node / Next.js ───────────────────────────────────────────────
+node_modules/
+.next/
+out/
+build/
+dist/
+.turbo/
+
+# ── Env files (never commit secrets) ─────────────────────────────
+.env
+.env.local
+.env.*.local
+# Allow the example templates
+!.env.example
+
+# ── Python / FastAPI ──────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+venv/
+.venv/
+env/
+*.egg-info/
+dist/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# ── ML artefacts (large — never commit trained weights) ───────────
+apps/ml-service/data/models/
+apps/ml-service/data/datasets/
+*.pkl
+*.pt
+*.pth
+*.onnx
+*.h5
+
+# ── Jupyter ───────────────────────────────────────────────────────
+.ipynb_checkpoints/
+
+# ── OS / Editor ───────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# ── Prisma ────────────────────────────────────────────────────────
+# Keep migrations in git; ignore generated client
+apps/web/node_modules/

@@ -1,0 +1,67 @@
+# DECISIONS.md
+
+> A running log of decisions and the reasoning behind them, so no one (human or
+> agent) re-litigates a settled question or silently reverses it. Append new
+> entries at the bottom with a date. Never delete old entries — if a decision is
+> reversed, add a new entry saying so and why.
+
+---
+
+### 2026-08-15 — Scope: build one content type end-to-end before adding the next
+**Decision:** Text detection (comments + blogs) ships first, fully deployed, before
+image work starts. Video, the extension, and the "website vibe-check" are stretch
+goals, attempted only if time remains after text + images work.
+**Why:** "Detect AI text, images, video, and websites" is really 4-5 separate ML
+problems. Building a dumb but fully-wired pipeline for one content type first avoids
+both sides building in isolation for weeks and hitting integration hell at the end.
+
+### 2026-08-15 — Monorepo structure
+**Decision:** One GitHub repo, `apps/web` and `apps/ml-service` as separate folders,
+`packages/shared-types` for the API contract.
+**Why:** Two people, two languages (TS + Python), but still want single source of
+truth for the API contract and easy coordination without managing two repos.
+
+### 2026-08-15 — Tech stack
+**Decision:** Next.js + TypeScript + Tailwind + shadcn/ui (web, on Vercel), FastAPI
+(ml-service, on Render/Railway/Cloud Run), Supabase (Postgres + Storage) + Prisma.
+**Why:** Reuses stack already shipped before (PrepPilot), minimizing new tools to
+learn while also learning Git/deployment workflow for the first time. Supabase
+chosen specifically because already familiar with it.
+
+### 2026-08-15 — No paid third-party AI APIs
+**Decision:** ML inference must run on self-hosted/open models. No paid detection
+APIs (e.g. OpenAI moderation, commercial AI-detector APIs) unless explicitly
+revisited here.
+**Why:** Keeps the entire project on $0 free tiers. The only realistic way this
+project starts costing money is a paid API call per request — avoid that path.
+
+### 2026-08-15 — No user accounts for MVP
+**Decision:** MVP is anonymous, rate-limited by IP. Auth (e.g. Clerk/NextAuth) is
+optional, added only in Phase 3 if scan history turns out to be worth it.
+**Why:** Cuts scope for the first working version. Accounts are easy to bolt on later.
+
+### 2026-08-15 — Git workflow
+**Decision:** `main` is always the deployable version. Every task gets its own
+branch (`yourname/task-name`), pushed and merged via a Pull Request. No mandatory
+formal review given it's a 2-person team — PRs are mainly a checkpoint, not a gate.
+**Why:** Both team members are new to Git; a lightweight version of the standard
+workflow avoids breaking `main` while not over-engineering process for a 2-person team.
+
+### 2026-08-15 — Frontend data-fetching: plain fetch, not React Query/SWR (for now)
+**Decision:** Phase 0/1 uses a thin custom hook (`useDetectText.ts`) wrapping plain
+`fetch` with its own loading/error/data state — no React Query or SWR dependency yet.
+**Why:** Only one mutation exists this early (`detect text`); adding a data-fetching
+library for that is unjustified overhead. Revisit in Phase 3 if scan history needs
+real caching/refetching — the custom hook's shape makes that migration small.
+
+### 2026-08-15 — Package manager: pnpm
+**Decision:** pnpm for the whole monorepo (`pnpm-workspace.yaml` at the root).
+**Why:** Proper workspace support for a multi-package monorepo (`apps/web`,
+`apps/ml-service`, `packages/shared-types`); npm and pnpm lockfiles should never be
+mixed, so this is committed to explicitly to avoid drift between the two contributors.
+
+### 2026-08-15 — No Turbo for now
+**Decision:** Use plain `pnpm -r <script>` across packages instead of Turborepo for
+Phase 0/1.
+**Why:** Only 2 apps + 1 shared package right now — a build orchestrator isn't
+earning its weight yet. Reconsider at Phase 2+ if cross-package build/watch gets slow.
