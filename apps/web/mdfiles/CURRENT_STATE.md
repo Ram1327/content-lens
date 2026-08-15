@@ -5,15 +5,16 @@
 > Update this whenever real progress is made; stale entries are worse than none.
 
 **Last updated:** 2026-08-15
-**Overall status:** Phase 0 in progress — scaffolding complete, not yet deployed.
+**Overall status:** Phase 0 setup complete (code, DB migrations, build verified) — ready for Vercel deployment & Phase 1.
 
 ## What exists
 
 - GitHub repo initialized and pushed: https://github.com/Ram1327/content-lens
 - Full monorepo folder skeleton (`apps/web`, `apps/ml-service`, `packages/shared-types`, `docs/`)
-- Next.js 16 (App Router + TypeScript + Tailwind) scaffolded in `apps/web`
+- Next.js 16 (App Router + TypeScript + Tailwind v4) scaffolded in `apps/web`
 - `packages/shared-types/src/index.ts` — API contract types (DetectTextRequest/Response, Verdict)
 - `apps/web/prisma/schema.prisma` — RateLimit model (Phase 1); ScanResult commented out (Phase 3)
+- `apps/web/prisma/migrations/20260815135609_init` — first migration applied to Supabase database
 - `apps/web/src/lib/utils.ts` — cn(), formatConfidence(), clamp()
 - `apps/web/src/lib/prisma.ts` — Prisma singleton
 - `apps/web/src/lib/ml-client.ts` — typed fetch wrapper → ML service
@@ -21,37 +22,36 @@
 - `apps/web/src/app/layout.tsx` — root layout with metadata
 - `apps/web/src/app/page.tsx` — Phase 0 placeholder ("coming soon")
 - `apps/web/.env.example` — committed env template
+- `apps/web/.env` and `.env.local` — configured with Supabase connection strings (IPv4 compatible session pooler for migrations)
 - `.github/workflows/web-ci.yml` and `ml-ci.yml` — CI for both sides
 - `pnpm-workspace.yaml` — monorepo workspace config (pnpm 11)
 - All deps installed (Next, React, Tailwind, Prisma, clsx, tailwind-merge)
-- shadcn/ui initializing
+- shadcn/ui initialized (`button.tsx` generated, `globals.css` updated)
 
 ## What's deployed / live
 
-- Nothing deployed yet.
+- Supabase Database: Migration `20260815135609_init` applied (`RateLimit` table active).
+- Web frontend: Pending Vercel project link.
 
 ## What's in progress right now
 
-- shadcn/ui init (running)
-- `pnpm run dev` sanity check (next)
-- Vercel project connection (manual step — Ramsurya does this in browser)
-- Supabase project creation + first Prisma migration (manual step — needs DB creds)
+- Vercel project connection (manual step — import repo, set root directory to `apps/web`)
 
 ## Known-working vs known-broken
 
 - `pnpm install` — ✅ working
-- `next dev` — not yet tested
+- `next dev` — ✅ verified (boots at localhost:3000 in 5.8s)
+- `prisma migrate dev` — ✅ working (migration applied to Supabase Postgres)
 
 ## Environment / accounts set up so far
 
 - [x] GitHub repo created → https://github.com/Ram1327/content-lens
 - [ ] Vercel project connected
-- [ ] Supabase project created
+- [x] Supabase project created & first Prisma migration run
 - [ ] Render/Railway/Cloud Run project for ml-service created
 
 ## Notes for the next agent picking this up
 
-- Do NOT re-run `pnpm create next-app` — Next.js is already scaffolded.
-- Supabase + Prisma migration cannot run until DATABASE_URL and DIRECT_URL are filled in `.env.local`.
-- shadcn components go in `src/components/ui/` — never hand-edit that folder.
-- Phase 1 work starts after Vercel deploy is confirmed working.
+- Next.js and Prisma migrations are verified and working against Supabase.
+- When deploying to Vercel, set root directory to `apps/web` and configure environment variables from `.env.example` (including `DATABASE_URL` and `DIRECT_URL`).
+- Phase 1 work (Landing page + text scanner UI + Next API route) can begin immediately.
