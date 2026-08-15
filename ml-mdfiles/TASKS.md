@@ -5,10 +5,10 @@
 > in unless real planning has happened for it.
 
 ## Phase 0 — Setup & Contract
-- [ ] Scaffold FastAPI service in `apps/ml-service`
+- [x] Scaffold FastAPI service in `apps/ml-service`
 - [ ] Deploy a "hello world" endpoint to Render/Railway/Cloud Run to confirm the pipeline works
-- [ ] Agree on the `/detect/text` API contract with the web side, write it into `PROJECT.md`
-- [ ] Decide on a benchmark/eval dataset plan for text detection
+- [x] Agree on the `/detect/text` API contract with the web side, write it into `PROJECT.md`
+- [x] Decide on a benchmark/eval dataset plan for text detection
 
 ## Phase 1 — Text Detection MVP
 - [ ] Research existing open-source text-AI-detection approaches as a baseline (perplexity/burstiness features, existing open models)

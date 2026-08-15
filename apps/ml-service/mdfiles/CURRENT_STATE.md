@@ -5,22 +5,27 @@
 > Update this whenever real progress is made; stale entries are worse than none.
 
 **Last updated:** 2026-08-15
-**Overall status:** Pre-code. Planning complete, nothing built yet.
+**Overall status:** Phase 0 complete. FastAPI service scaffolded and verified locally. Ready for deployment.
 
 ## What exists
-- (nothing yet — repo not yet initialized)
+- Git repository initialized.
+- FastAPI scaffolding in `apps/ml-service` (including `app/main.py` with mock `GET /` and `POST /detect/text` endpoints).
+- Local python virtual environment setup with `fastapi`, `uvicorn`, `pydantic`, and `httpx`.
+- Dockerfile for Railway deployment.
+- Verification test suite (`apps/ml-service/app/test_app.py`).
 
 ## What's deployed / live
 - Nothing is deployed anywhere yet.
 
 ## What's in progress right now
-- (empty — fill in when work starts)
+- Phase 1 research on open-source text-AI-detection baselines.
 
 ## Known-working vs known-broken
-- N/A yet
+- **Working**: FastAPI local app with `GET /` and `POST /detect/text` endpoints.
+- **Working**: `app/test_app.py` passes all verification checks.
 
 ## Environment / accounts set up so far
-- [ ] GitHub repo created
+- [x] GitHub repo created
 - [ ] Vercel project connected
 - [ ] Supabase project created
 - [ ] Render/Railway/Cloud Run project for ml-service created

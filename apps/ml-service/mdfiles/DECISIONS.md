@@ -65,3 +65,12 @@ mixed, so this is committed to explicitly to avoid drift between the two contrib
 Phase 0/1.
 **Why:** Only 2 apps + 1 shared package right now — a build orchestrator isn't
 earning its weight yet. Reconsider at Phase 2+ if cross-package build/watch gets slow.
+
+### 2026-08-15 — ML Hosting Platform
+**Decision:** Deploy the `apps/ml-service` to Railway.
+**Why:** Quick setup, excellent support for Dockerfile deployments, and handles Python/FastAPI environment resources reliably on free/cheap tiers.
+
+### 2026-08-15 — ML Text Detection Benchmark Dataset
+**Decision:** Use a combined subset of the DAIGT V4 and HC3 (Human ChatGPT Comparison Corpus) datasets for model evaluation.
+**Why:** This combination provides a diverse baseline covering both short-form responses/Q&A (HC3) and multi-model LLM generation (DAIGT V4 includes outputs from GPT-3.5, GPT-4, Claude, Gemini, LLaMA).
+
