@@ -65,3 +65,16 @@ mixed, so this is committed to explicitly to avoid drift between the two contrib
 Phase 0/1.
 **Why:** Only 2 apps + 1 shared package right now — a build orchestrator isn't
 earning its weight yet. Reconsider at Phase 2+ if cross-package build/watch gets slow.
+
+### 2026-08-16 — Phase 2: Image detection API contract
+**Decision:** `/detect/image` uses `multipart/form-data` with an `image` binary file field.
+**Why:** Avoids base64 encoding overhead (33% larger payloads) and enables direct streaming
+between Next.js API routes and the FastAPI ML service.
+
+### 2026-08-16 — Failover & Backup API: Walter AI Integration
+**Decision:** If primary self-hosted ML inference (`ML_SERVICE_URL`) fails or is offline,
+requests failover to Walter AI (`developer-portal.walterwrites.ai`) via `WALTER_AI_API_KEY`,
+before falling back to local contract-compliant dev mock generators.
+**Why:** Ensures high availability, uninterrupted testing, and graceful degradation during
+service cold starts or development outages.
+

@@ -1,6 +1,6 @@
 import { PageShell } from "@/components/layout/PageShell";
 import { Hero } from "@/components/landing/Hero";
-import { TextScanner } from "@/components/scanner/TextScanner";
+import { HomeScannerTabs } from "@/components/scanner/HomeScannerTabs";
 import { HowItWorks } from "@/components/landing/HowItWorks";
 import { ContentTypePicker } from "@/components/landing/ContentTypePicker";
 
@@ -10,9 +10,9 @@ export default function HomePage() {
       {/* Hero Header */}
       <Hero />
 
-      {/* Main Interactive Scanner */}
+      {/* Main Interactive Scanner Tabs (Text + Image) */}
       <section className="mx-auto max-w-3xl">
-        <TextScanner />
+        <HomeScannerTabs />
       </section>
 
       {/* How it works pipeline explainer */}

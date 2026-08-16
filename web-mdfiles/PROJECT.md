@@ -84,10 +84,23 @@ notifying the other side**:
   "confidence": 0.87,
   "model_version": "text-v1"
 }
+
+// POST /detect/image
+// request: multipart/form-data with file in 'image' field
+// response
+{
+  "verdict": "ai_generated" | "human" | "uncertain",
+  "confidence": 0.94,
+  "model_version": "image-v1",
+  "details": {
+    "format": "image/png",
+    "width": 1024,
+    "height": 1024,
+    "artifact_score": 0.91
+  }
+}
 ```
 
-(Same shape pattern extends to `/detect/image` etc. as those phases start — add
-the real contract here once it's agreed, don't invent it unilaterally.)
 
 ## 6. Roadmap (phases — see TASKS.md in each folder for the breakdown)
 

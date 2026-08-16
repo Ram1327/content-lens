@@ -13,10 +13,11 @@ export function ContentTypePicker() {
     },
     {
       title: "AI Image Detection",
-      phase: "Phase 2 • Up Next",
+      phase: "Phase 2 • Live",
       description: "Detect synthetic artifacts from Midjourney, Stable Diffusion, and DALL-E.",
       icon: ImageIcon,
-      status: "upcoming",
+      status: "active",
+      href: "/detect/image",
     },
     {
       title: "Deepfake & Video",

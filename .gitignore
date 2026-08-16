@@ -5,6 +5,8 @@ out/
 build/
 dist/
 .turbo/
+*.tsbuildinfo
+
 
 # ── Env files (never commit secrets) ─────────────────────────────
 .env

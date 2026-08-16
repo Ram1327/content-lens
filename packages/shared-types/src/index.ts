@@ -17,10 +17,22 @@ export interface DetectTextResponse {
   model_version: string;
 }
 
-// ── POST /detect/image  (Phase 2 — shape TBD, do not add unilaterally) ────
-// export interface DetectImageRequest { ... }
-// export interface DetectImageResponse { ... }
+// ── POST /detect/image (Phase 2 — multipart/form-data with 'image' file) ──
+export interface DetectImageResponse {
+  verdict: Verdict;
+  /** Probability score in range 0.0 – 1.0 */
+  confidence: number;
+  model_version: string;
+  /** Optional metadata about the image analysis */
+  details?: {
+    format?: string;
+    width?: number;
+    height?: number;
+    artifact_score?: number;
+  };
+}
 
 // ── POST /detect/video  (Phase 4 — async job, shape TBD) ──────────────────
 // export interface DetectVideoRequest { ... }
 // export interface DetectVideoResponse { ... }
+

@@ -22,10 +22,13 @@
 - [x] Deploy and test the full pipeline end-to-end
 
 ## Phase 2 — Image Detection
-- [ ] Build image upload UI
-- [ ] Wire uploads to Supabase Storage
-- [ ] Call the `/detect/image` endpoint
-- [ ] Show result for image scans (reuse the result screen component if possible)
+- [x] Agree on `/detect/image` API contract (`multipart/form-data` with binary image field)
+- [x] Build drag & drop and clipboard paste ImageScanner UI with preset samples
+- [x] Build API route `POST /api/detect/image` with file validation (PNG, JPG, WebP <= 10MB) and IP rate limiting
+- [x] Integrate failover chain (Primary ML -> Walter AI fallback API -> Local dev mock)
+- [x] Build dedicated image scanner page (`/detect/image`) and homepage tabs switcher
+- [x] Show result for image scans in unified ResultCard component with visual preview
+
 
 ## Phase 3 — History / Auth (optional)
 - [ ] Decide whether scan history is worth the added complexity

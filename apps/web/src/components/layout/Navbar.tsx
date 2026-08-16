@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Sparkles, ScanText, ImageIcon, VideoIcon } from "lucide-react";
 
 function GithubIcon({ className }: { className?: string }) {
@@ -16,6 +19,10 @@ function GithubIcon({ className }: { className?: string }) {
 }
 
 export function Navbar() {
+  const pathname = usePathname();
+  const isText = pathname === "/" || pathname.startsWith("/detect/text");
+  const isImage = pathname.startsWith("/detect/image");
+
   return (
     <header className="sticky top-0 z-40 w-full border-b border-border/80 bg-background/85 backdrop-blur-md transition-colors">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
@@ -38,26 +45,34 @@ export function Navbar() {
         {/* Content Type Nav Badges */}
         <nav className="hidden md:flex items-center gap-1 rounded-full border border-border bg-muted/40 p-1 text-xs">
           <Link
-            href="/"
-            className="flex items-center gap-1.5 rounded-full bg-background px-3 py-1.5 font-medium text-foreground shadow-xs transition-colors"
+            href="/detect/text"
+            className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 font-medium transition-colors ${
+              isText
+                ? "bg-background text-foreground shadow-xs"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
           >
             <ScanText className="size-3.5 text-primary" />
             <span>Text Scan</span>
             <span className="rounded-full bg-emerald-500/15 px-1.5 py-0.2 text-[10px] font-semibold text-emerald-700 dark:text-emerald-300">
-              Live MVP
+              Live
             </span>
           </Link>
 
-          <div
-            className="flex items-center gap-1.5 rounded-full px-3 py-1.5 font-medium text-muted-foreground opacity-60 cursor-not-allowed"
-            title="Image Detection coming in Phase 2"
+          <Link
+            href="/detect/image"
+            className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 font-medium transition-colors ${
+              isImage
+                ? "bg-background text-foreground shadow-xs"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
           >
-            <ImageIcon className="size-3.5" />
-            <span>Images</span>
-            <span className="rounded-full bg-muted px-1.5 py-0.2 text-[10px] font-normal">
+            <ImageIcon className="size-3.5 text-primary" />
+            <span>Image Scan</span>
+            <span className="rounded-full bg-primary/15 px-1.5 py-0.2 text-[10px] font-semibold text-primary">
               Phase 2
             </span>
-          </div>
+          </Link>
 
           <div
             className="flex items-center gap-1.5 rounded-full px-3 py-1.5 font-medium text-muted-foreground opacity-60 cursor-not-allowed"
