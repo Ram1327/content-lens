@@ -74,3 +74,10 @@ earning its weight yet. Reconsider at Phase 2+ if cross-package build/watch gets
 **Decision:** Use a combined subset of the DAIGT V4 and HC3 (Human ChatGPT Comparison Corpus) datasets for model evaluation.
 **Why:** This combination provides a diverse baseline covering both short-form responses/Q&A (HC3) and multi-model LLM generation (DAIGT V4 includes outputs from GPT-3.5, GPT-4, Claude, Gemini, LLaMA).
 
+### 2026-08-15 — Model Hosting on Hugging Face Spaces (Hybrid Architecture)
+**Decision:** Deploy the core text-detection transformer model (RoBERTa-based) on Hugging Face Spaces (using Gradio or FastAPI) instead of running inference directly inside the Railway container. The Railway-based `apps/ml-service` will serve as an API gateway that handles frontend requests, performs validation/authentication, forwards the payloads to Hugging Face Spaces, and formats the output.
+**Why:** Railway's free/hobby tier limits memory to 500MB RAM, which is insufficient for loading and running even lightweight RoBERTa models (which typically require 1.5GB–3GB RAM during model load and active inference). Hugging Face Spaces offers free CPU tiers with 16GB RAM, making it ideal for hosting the model, while Railway is excellent for running a lightweight, responsive API gateway.
+
+### 2026-08-16 — Phase 1 hosting pivot to Lightning.ai
+**Decision:** Host the RoBERTa model on Lightning.ai (CPU Studio running FastAPI via the API Builder plugin) rather than Hugging Face Spaces (which is now paid for Gradio and Docker SDKs).
+**Why:** Keeps the project 100% on the free tier. Waking up the sleeping CPU Studio on demand acts as a serverless deployment, resolving Railway memory limits on a $0 budget.
