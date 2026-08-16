@@ -36,6 +36,10 @@ apps/ml-service/data/datasets/
 *.pth
 *.onnx
 *.h5
+*.safetensors
+*.bin
+checkpoints/
+my_custom_detector/
 
 # ── Jupyter ───────────────────────────────────────────────────────
 .ipynb_checkpoints/
