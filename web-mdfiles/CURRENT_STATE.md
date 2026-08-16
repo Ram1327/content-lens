@@ -21,7 +21,8 @@
 - `apps/web/src/app/api/detect/image/route.ts` — Image detection API endpoint with multipart file validation and rate limiting
 - `apps/web/src/app/api/health/route.ts` — health check endpoint
 - `apps/web/src/hooks/useDetectText.ts` & `useDetectImage.ts` — custom React hooks managing scan lifecycles and quotas
-- `apps/web/src/components/layout/Navbar.tsx` (dynamic active link switcher), `Footer.tsx`, `PageShell.tsx`
+- `apps/web/src/components/layout/Navbar.tsx` (dynamic active link switcher + dark/light ThemeToggle), `Footer.tsx`, `PageShell.tsx`
+- `apps/web/src/components/theme/ThemeToggle.tsx` — persistent zero-flash dark/light mode toggle
 - `apps/web/src/components/scanner/TextScanner.tsx` & `ImageScanner.tsx` — interactive scanners with drag-and-drop, clipboard paste, and presets
 - `apps/web/src/components/scanner/HomeScannerTabs.tsx` — dual scanner tabs on landing page
 - `apps/web/src/components/result/ResultCard.tsx` — unified multimodal result card with confidence bar and preview
