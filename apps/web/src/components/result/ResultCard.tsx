@@ -76,7 +76,11 @@ export function ResultCard({ result, onReset }: ResultCardProps) {
           <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground block mb-1.5">
             Analysis Result
           </span>
-          <VerdictBadge verdict={result.verdict} size="lg" />
+          <VerdictBadge
+            verdict={result.verdict}
+            type={isImage ? "image" : "text"}
+            size="lg"
+          />
         </div>
 
         <div className="flex items-center gap-1.5 rounded-full border border-border/80 bg-muted/60 px-3 py-1 text-xs text-muted-foreground">

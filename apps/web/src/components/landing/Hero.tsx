@@ -6,7 +6,7 @@ export function Hero() {
       {/* Badge */}
       <div className="inline-flex items-center gap-2 rounded-full border border-border bg-muted/60 px-3.5 py-1 text-xs font-medium text-muted-foreground shadow-xs">
         <span className="flex size-2 rounded-full bg-emerald-500 animate-pulse" />
-        <span>Phase 2 Live — Text & Image AI Detection</span>
+        <span>Multi-Modal AI Detector • Text & Image</span>
       </div>
 
       {/* Main Headline */}

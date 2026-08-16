@@ -16,10 +16,10 @@ export function HomeScannerTabs() {
           <button
             type="button"
             onClick={() => setActiveTab("text")}
-            className={`inline-flex items-center gap-2 rounded-lg px-4 py-2 text-xs font-semibold transition-all ${
+            className={`inline-flex cursor-pointer items-center gap-2 rounded-lg px-4 py-2 text-xs font-semibold transition-all ${
               activeTab === "text"
                 ? "bg-background text-foreground shadow-xs"
-                : "text-muted-foreground hover:text-foreground"
+                : "text-muted-foreground hover:text-foreground hover:bg-background/40"
             }`}
           >
             <ScanText className="size-3.5 text-primary" />
@@ -29,17 +29,14 @@ export function HomeScannerTabs() {
           <button
             type="button"
             onClick={() => setActiveTab("image")}
-            className={`inline-flex items-center gap-2 rounded-lg px-4 py-2 text-xs font-semibold transition-all ${
+            className={`inline-flex cursor-pointer items-center gap-2 rounded-lg px-4 py-2 text-xs font-semibold transition-all ${
               activeTab === "image"
                 ? "bg-background text-foreground shadow-xs"
-                : "text-muted-foreground hover:text-foreground"
+                : "text-muted-foreground hover:text-foreground hover:bg-background/40"
             }`}
           >
             <ImageIcon className="size-3.5 text-primary" />
             <span>Image Detector</span>
-            <span className="rounded-full bg-primary/15 px-1.5 py-0.2 text-[9px] font-bold text-primary">
-              Phase 2
-            </span>
           </button>
         </div>
       </div>

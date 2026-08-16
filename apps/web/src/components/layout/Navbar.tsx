@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Sparkles, ScanText, ImageIcon, VideoIcon } from "lucide-react";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
 function GithubIcon({ className }: { className?: string }) {
   return (
@@ -29,13 +30,13 @@ export function Navbar() {
         {/* Brand */}
         <Link
           href="/"
-          className="group flex items-center gap-2.5 transition-opacity hover:opacity-90"
+          className="group flex items-center gap-2.5 transition-opacity hover:opacity-90 cursor-pointer"
         >
           <div className="flex size-9 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-sm ring-1 ring-primary/10 transition-transform group-hover:scale-105">
             <Sparkles className="size-4.5" />
           </div>
           <div className="flex flex-col">
-            <span className="text-base font-semibold tracking-tight">ContentLens</span>
+            <span className="text-base font-semibold tracking-tight text-foreground">ContentLens</span>
             <span className="text-[10px] uppercase font-medium tracking-wider text-muted-foreground">
               AI Content Detector
             </span>
@@ -46,53 +47,51 @@ export function Navbar() {
         <nav className="hidden md:flex items-center gap-1 rounded-full border border-border bg-muted/40 p-1 text-xs">
           <Link
             href="/detect/text"
-            className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 font-medium transition-colors ${
+            className={`flex items-center gap-1.5 rounded-full px-3.5 py-1.5 font-medium transition-all cursor-pointer ${
               isText
                 ? "bg-background text-foreground shadow-xs"
-                : "text-muted-foreground hover:text-foreground"
+                : "text-muted-foreground hover:text-foreground hover:bg-background/50"
             }`}
           >
             <ScanText className="size-3.5 text-primary" />
             <span>Text Scan</span>
-            <span className="rounded-full bg-emerald-500/15 px-1.5 py-0.2 text-[10px] font-semibold text-emerald-700 dark:text-emerald-300">
-              Live
-            </span>
           </Link>
 
           <Link
             href="/detect/image"
-            className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 font-medium transition-colors ${
+            className={`flex items-center gap-1.5 rounded-full px-3.5 py-1.5 font-medium transition-all cursor-pointer ${
               isImage
                 ? "bg-background text-foreground shadow-xs"
-                : "text-muted-foreground hover:text-foreground"
+                : "text-muted-foreground hover:text-foreground hover:bg-background/50"
             }`}
           >
             <ImageIcon className="size-3.5 text-primary" />
             <span>Image Scan</span>
-            <span className="rounded-full bg-primary/15 px-1.5 py-0.2 text-[10px] font-semibold text-primary">
-              Phase 2
-            </span>
           </Link>
 
           <div
-            className="flex items-center gap-1.5 rounded-full px-3 py-1.5 font-medium text-muted-foreground opacity-60 cursor-not-allowed"
-            title="Video Detection coming in Phase 4"
+            className="flex items-center gap-1.5 rounded-full px-3.5 py-1.5 font-medium text-muted-foreground opacity-60 cursor-not-allowed"
+            title="Video Detection coming in stretch phase"
           >
             <VideoIcon className="size-3.5" />
             <span>Video</span>
             <span className="rounded-full bg-muted px-1.5 py-0.2 text-[10px] font-normal">
-              Phase 4
+              Soon
             </span>
           </div>
         </nav>
 
-        {/* Right side link */}
-        <div className="flex items-center gap-3">
+        {/* Right side controls: Theme Toggle + GitHub */}
+        <div className="flex items-center gap-2.5">
+          {/* Dark / Light Mode Toggle */}
+          <ThemeToggle />
+
           <a
             href="https://github.com/Ram1327/content-lens"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-lg border border-border/80 bg-background/60 px-3 py-1.5 text-xs font-medium text-muted-foreground hover:bg-accent hover:text-foreground transition-colors"
+            className="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-border/80 bg-background/60 px-3 py-1.5 text-xs font-medium text-muted-foreground hover:bg-accent hover:text-foreground transition-all"
+            title="View Source on GitHub"
           >
             <GithubIcon className="size-3.5" />
             <span className="hidden sm:inline">GitHub</span>

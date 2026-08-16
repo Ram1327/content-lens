@@ -95,14 +95,14 @@ export function TextScanner() {
           <button
             type="button"
             onClick={() => handleSampleClick("ai")}
-            className="rounded-md border border-border bg-muted/50 px-2.5 py-1 text-[11px] font-medium text-foreground hover:bg-accent transition-colors"
+            className="cursor-pointer rounded-md border border-border bg-muted/50 px-2.5 py-1 text-[11px] font-medium text-foreground hover:bg-accent hover:border-primary/40 active:scale-95 transition-all"
           >
             Sample AI
           </button>
           <button
             type="button"
             onClick={() => handleSampleClick("human")}
-            className="rounded-md border border-border bg-muted/50 px-2.5 py-1 text-[11px] font-medium text-foreground hover:bg-accent transition-colors"
+            className="cursor-pointer rounded-md border border-border bg-muted/50 px-2.5 py-1 text-[11px] font-medium text-foreground hover:bg-accent hover:border-primary/40 active:scale-95 transition-all"
           >
             Sample Human
           </button>
@@ -131,7 +131,7 @@ export function TextScanner() {
               <button
                 type="button"
                 onClick={handlePaste}
-                className="inline-flex items-center gap-1 hover:text-foreground transition-colors"
+                className="cursor-pointer inline-flex items-center gap-1 hover:text-foreground transition-colors"
                 title="Paste from clipboard"
               >
                 <Clipboard className="size-3.5" />
@@ -142,7 +142,7 @@ export function TextScanner() {
                 <button
                   type="button"
                   onClick={handleClear}
-                  className="inline-flex items-center gap-1 hover:text-destructive transition-colors"
+                  className="cursor-pointer inline-flex items-center gap-1 hover:text-destructive transition-colors"
                   title="Clear text"
                 >
                   <Trash2 className="size-3.5" />

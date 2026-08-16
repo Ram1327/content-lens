@@ -155,7 +155,7 @@ export function ImageScanner() {
               key={sample.id}
               type="button"
               onClick={() => handleSampleSelect(sample)}
-              className="rounded-md border border-border bg-muted/50 px-2.5 py-1 text-[11px] font-medium text-foreground hover:bg-accent transition-colors"
+              className="cursor-pointer rounded-md border border-border bg-muted/50 px-2.5 py-1 text-[11px] font-medium text-foreground hover:bg-accent hover:border-primary/40 active:scale-95 transition-all"
             >
               {sample.name}
             </button>
@@ -234,7 +234,7 @@ export function ImageScanner() {
                   <button
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
-                    className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-muted/40 px-3 py-1.5 text-xs font-medium text-foreground hover:bg-accent transition-colors"
+                    className="cursor-pointer inline-flex items-center gap-1.5 rounded-lg border border-border bg-muted/40 px-3 py-1.5 text-xs font-medium text-foreground hover:bg-accent transition-colors"
                   >
                     <FileImage className="size-3.5" />
                     <span>Change Image</span>
@@ -245,7 +245,7 @@ export function ImageScanner() {
                       reset();
                       if (fileInputRef.current) fileInputRef.current.value = "";
                     }}
-                    className="inline-flex items-center gap-1.5 rounded-lg border border-destructive/20 bg-destructive/10 px-3 py-1.5 text-xs font-medium text-destructive hover:bg-destructive/20 transition-colors"
+                    className="cursor-pointer inline-flex items-center gap-1.5 rounded-lg border border-destructive/20 bg-destructive/10 px-3 py-1.5 text-xs font-medium text-destructive hover:bg-destructive/20 transition-colors"
                   >
                     <Trash2 className="size-3.5" />
                     <span>Remove</span>

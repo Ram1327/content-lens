@@ -5,7 +5,7 @@ export function ContentTypePicker() {
   const contentTypes = [
     {
       title: "Text Detection",
-      phase: "Phase 1 • Live",
+      phase: "Live",
       description: "Analyze comments, blogs, essays, and long-form articles.",
       icon: ScanText,
       status: "active",
@@ -13,7 +13,7 @@ export function ContentTypePicker() {
     },
     {
       title: "AI Image Detection",
-      phase: "Phase 2 • Live",
+      phase: "Live",
       description: "Detect synthetic artifacts from Midjourney, Stable Diffusion, and DALL-E.",
       icon: ImageIcon,
       status: "active",
@@ -21,7 +21,7 @@ export function ContentTypePicker() {
     },
     {
       title: "Deepfake & Video",
-      phase: "Phase 4 • Stretch Goal",
+      phase: "Coming Soon",
       description: "Frame-by-frame temporal consistency checks for generated video clips.",
       icon: VideoIcon,
       status: "upcoming",
