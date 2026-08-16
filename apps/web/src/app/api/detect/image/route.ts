@@ -123,9 +123,11 @@ export async function POST(req: NextRequest) {
       }
     );
   } catch (error: unknown) {
+    const errorMsg =
+      error instanceof Error ? error.message : "Unable to complete image analysis. Please try again.";
     console.error("[API /detect/image] Error processing request:", error);
     return NextResponse.json(
-      { error: "Unable to complete image analysis. Please try again." },
+      { error: errorMsg },
       { status: 500 }
     );
   }
