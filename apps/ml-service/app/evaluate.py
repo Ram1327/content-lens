@@ -14,7 +14,7 @@ def run_evaluation(api_url: str, limit: int):
     print(f"Loading Hello-SimpleAI/HC3 dataset from Hugging Face...")
     # Load a small split of the 'all' subset
     # We load slightly more samples to ensure we get up to the limit of valid human/chatgpt responses
-    dataset = load_dataset("Hello-SimpleAI/HC3", "all", split="train", streaming=True)
+    dataset = load_dataset("Hello-SimpleAI/HC3", "all", split="train", streaming=True, trust_remote_code=True)
     
     test_cases = []
     print("Preparing test cases...")
