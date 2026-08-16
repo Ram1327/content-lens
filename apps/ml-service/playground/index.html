@@ -365,8 +365,25 @@
 
             // Set loading state
             checkBtn.disabled = true;
-            btnText.textContent = "Analyzing...";
             spinner.style.display = 'inline-block';
+            
+            let elapsed = 0;
+            btnText.textContent = "Connecting to gateway...";
+            
+            const progressInterval = setInterval(() => {
+                elapsed += 1;
+                if (elapsed < 5) {
+                    btnText.textContent = "Connecting to gateway...";
+                } else if (elapsed < 20) {
+                    btnText.textContent = "Waking up the cloud server (please wait)...";
+                } else if (elapsed < 40) {
+                    btnText.textContent = "Loading model weights into RAM...";
+                } else if (elapsed < 60) {
+                    btnText.textContent = "Running text classification...";
+                } else {
+                    btnText.textContent = "Almost done...";
+                }
+            }, 1000);
 
             try {
                 const response = await fetch(`${endpointVal}/detect/text`, {
@@ -403,6 +420,16 @@
                 // Clear classes and apply based on verdict
                 verdictBadge.className = 'verdict-badge';
                 
+                // Check if it is the sleeping fallback
+                if (modelVersion === 'text-v1-fallback-sleeping') {
+                    verdictBadge.textContent = 'Server Sleeping';
+                    verdictBadge.classList.add('verdict-uncertain');
+                    verdictDetail.textContent = 'Indeterminate';
+                    scoreBarFill.style.backgroundColor = 'var(--color-uncertain)';
+                    showError("The model server on Lightning.ai was asleep. It has been triggered to wake up. Please wait 15 seconds and click 'Analyze Content' again.");
+                    return;
+                }
+
                 if (verdict === 'ai_generated') {
                     verdictBadge.textContent = 'AI Generated';
                     verdictBadge.classList.add('verdict-ai');
@@ -424,6 +451,7 @@
                 console.error(err);
                 showError(`Failed to connect to gateway: ${err.message}. Make sure your Railway service is running and CORS is enabled.`);
             } finally {
+                clearInterval(progressInterval);
                 // Restore button
                 checkBtn.disabled = false;
                 btnText.textContent = "Analyze Content";

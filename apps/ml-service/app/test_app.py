@@ -42,7 +42,7 @@ def test_detect_text_success_ai(mock_post):
         mock_post.assert_called_once_with(
             "http://mock-lightning-ai-url/detect/text",
             json={"text": "This is AI generated content."},
-            timeout=30.0
+            timeout=60.0
         )
 
 @patch("httpx.AsyncClient.post")

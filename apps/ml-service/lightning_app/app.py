@@ -1,3 +1,7 @@
+import os
+# Force Hugging Face cache to be inside the persistent Studio directory
+os.environ["HF_HOME"] = "/teamspace/studios/this_studio/hf_cache"
+
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 from transformers import AutoTokenizer, AutoModelForSequenceClassification

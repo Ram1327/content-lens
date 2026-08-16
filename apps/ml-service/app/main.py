@@ -18,8 +18,8 @@ logger = logging.getLogger("gateway")
 # Lifespan manager to manage httpx connection pooling
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Initialize connection pool with generous timeout to handle cold starts
-    app.state.http_client = httpx.AsyncClient(timeout=30.0)
+    # Initialize connection pool with generous timeout to handle cold starts (60s)
+    app.state.http_client = httpx.AsyncClient(timeout=60.0)
     yield
     # Clean up connection pool
     await app.state.http_client.aclose()
@@ -80,11 +80,11 @@ async def detect_text(request: TextDetectionRequest, http_request: Request):
         target_url = f"{model_url.rstrip('/')}/detect/text"
         logger.info(f"Forwarding text detection request to: {target_url}")
         
-        # Make the request to Lightning.ai model server (wait up to 30s for wake-up)
+        # Make the request to Lightning.ai model server (wait up to 60s for wake-up)
         response = await client.post(
             target_url,
             json={"text": request.text},
-            timeout=30.0
+            timeout=60.0
         )
         
         if response.status_code == 200:
